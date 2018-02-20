@@ -48,7 +48,7 @@ io.on('connection', function(socket){
 	socket.on('chat message', function(msg,login,mdp){
 		console.log(login);
 		console.log(msg);
-		if(login == "rey@gmail.com" && mdp == "mdp"){
+		if(login == "rey@gmail.com" && mdp == "mdp" || login == "bibi@gmail.com" && mdp == "mdp"){
 			io.emit('chat message', msg,login );
 		}
 	});
@@ -57,7 +57,7 @@ io.on('connection', function(socket){
 	console.log(login);
 	var verif = false;
 	//Futur demande si utilisateur Existe
-	if(login == "rey@gmail.com" && mdp == "mdp"){
+	if(login == "rey@gmail.com" && mdp == "mdp" || login == "bibi@gmail.com" && mdp == "mdp"){
 		verif = true ;
 		console.log("ConnexOk");
 	}
