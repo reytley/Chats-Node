@@ -1,20 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////SYSTEME ROUTE DU SERVER///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var route = function(app) { 
+var route = function(app,express) { 
+
+		//DEPENDANCE
+
+
 	app.get('/', function(req, res){
-	  res.sendFile(__dirname + '/login.html');
+	  res.sendFile(__dirname + '/views/login.html');
 	});
-	app.get('/login', function(req, res){
-	  res.sendFile(__dirname + '/login.html');
+	app.get('/inscription', function(req, res){
+	  res.sendFile(__dirname + '/views/inscription.html');
 	});
 
 	app.get('/forms', function(req, res){
-	  res.sendFile(__dirname + '/forms.html');
+		
+
+	 	res.sendFile(__dirname + '/views/forms.html');
 	});
 
 	app.get('/chat', function(req, res){
-	  res.sendFile(__dirname + '/chat.html');
+	  
+	  res.sendFile(__dirname + '/views/chat.html');
 	});
 }
 exports.route = route;
