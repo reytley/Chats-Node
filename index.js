@@ -1,10 +1,22 @@
-/////////////////////////////////////////////////////
-/////////////////VAR BASE SERVER/////////////////////
-/////////////////////////////////////////////////////
+
+
+//jJVicPjsWenQvPgJ
+
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
+const express = require('express');
+
+app.use("/vendor/bootstrap/css/bootstrap.min.css", express.static(__dirname + '/vendor/bootstrap/css/bootstrap.min.css'));
+app.use("/vendor/font-awesome/css/font-awesome.min.css", express.static(__dirname + '/vendor/font-awesome/css/font-awesome.min.css'));
+app.use("/dist/css/sb-admin-2.css", express.static(__dirname + '/dist/css/sb-admin-2.css'));
+app.use("/vendor/metisMenu/metisMenu.min.css", express.static(__dirname + '/vendor/metisMenu/metisMenu.min.css'));
+
+//app.use("/Assets/js", express.static(__dirname + '/Assets/js'));
+
+
+
 
 /////////////////////////////////////////////////////
 ////////////SYSTEME ROUTE DU SERVER//////////////////
@@ -14,6 +26,10 @@ app.get('/', function(req, res){
 });
 app.get('/login', function(req, res){
   res.sendFile(__dirname + '/login.html');
+});
+
+app.get('/forms', function(req, res){
+  res.sendFile(__dirname + '/forms.html');
 });
 /////////////////////////////////////////////////////
 ///////////////SYSTEME SOCKET.IO/////////////////////
