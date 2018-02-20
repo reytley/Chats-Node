@@ -10,6 +10,9 @@ email: bibi@gmail.com mdp : mdp
 
 Neccesite Node Express et Socket.io
 
+Telecharger node sur le server 
+
+
 Install express 
 ```
 npm install express --save
