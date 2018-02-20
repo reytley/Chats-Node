@@ -1,29 +1,14 @@
-
-
 //jJVicPjsWenQvPgJ
 
 var app = require('express')();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+
 var port = process.env.PORT || 3000;
 const express = require('express');
+var model = require('./app/model');
+var route = require('./app/route');
+var controller = require('./app/controller');
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'chat',
- 
-});
-
-connection.connect(function(err) {
-  if (err) {
-    return console.error('error: ' + err.message);
-  }
- 
-  console.log('Connected to the MySQL server.');
-});
 //DEPENDANCE
 app.use("/vendor/bootstrap/css/bootstrap.min.css", express.static(__dirname + '/vendor/bootstrap/css/bootstrap.min.css'));
 app.use("/vendor/font-awesome/css/font-awesome.min.css", express.static(__dirname + '/vendor/font-awesome/css/font-awesome.min.css'));
@@ -38,67 +23,12 @@ app.use("/dist/js/sb-admin-2.js", express.static(__dirname + '/dist/js/sb-admin-
 app.use(express.static(__dirname + '/views'));
 
 
+//CONNEXION BDD
+model.connex();
 
-/////////////////////////////////////////////////////
-////////////SYSTEME ROUTE DU SERVER//////////////////
-/////////////////////////////////////////////////////
-
-
-
-
-app.get('/', function(req, res){
-
-    var email = '"reytley@gmail.com"'
-     var requete = 'SELECT * from utilisateur  where email = ' + email;
-      console.log(requete);
-	connection.query( requete , function(err, rows, fields) {
-	connection.end();
-	  if (!err)
-	    console.log('The solution is: ', rows);
-	  else
-	    console.log('Error while performing Query.');
-	  });
-
-
-
-  res.sendFile(__dirname + '/login.html');
-});
-app.get('/login', function(req, res){
-  res.sendFile(__dirname + '/login.html');
-});
-
-app.get('/forms', function(req, res){
-  res.sendFile(__dirname + '/forms.html');
-});
-
-app.get('/chat', function(req, res){
-  res.sendFile(__dirname + '/chat.html');
-});
-/////////////////////////////////////////////////////
-///////////////SYSTEME SOCKET.IO/////////////////////
-/////////////////////////////////////////////////////
-io.on('connection', function(socket){
-
-	//RECEPTION DE MESSAGE -- Demande de login est mdp si connu dans la bdd alors afficher le msg dans le tchat room 
-	socket.on('chat message', function(msg,login,mdp){
-		console.log(login);
-		console.log(msg);
-		if(login == "rey@gmail.com" && mdp == "mdp" || login == "bibi@gmail.com" && mdp == "mdp"){
-			io.emit('chat message', msg,login );
-		}
-	});
-
-	socket.on('login', function(login,mdp){
-	console.log(login);
-	var verif = false;
-	//Futur demande si utilisateur Existe
-	if(login == "rey@gmail.com" && mdp == "mdp" || login == "bibi@gmail.com" && mdp == "mdp"){
-		verif = true ;
-		console.log("ConnexOk");
-	}
-	io.emit('login',verif,login,mdp);
-	});
-});
+ model.test();
+route.route(app);
+controller.controller(http);
 
 http.listen(port, function(){
   console.log('listening on *:' + port);
