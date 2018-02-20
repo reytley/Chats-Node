@@ -10,5 +10,17 @@
   },
   "scripts": {
     "start": "node index.js"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reytley/Chats-Node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reytley/Chats-Node/issues"
+  },
+  "homepage": "https://github.com/reytley/Chats-Node#readme"
 }

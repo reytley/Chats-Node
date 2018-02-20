@@ -8,6 +8,23 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 const express = require('express');
 
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'chat',
+ 
+});
+
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+ 
+  console.log('Connected to the MySQL server.');
+});
+//DEPENDANCE
 app.use("/vendor/bootstrap/css/bootstrap.min.css", express.static(__dirname + '/vendor/bootstrap/css/bootstrap.min.css'));
 app.use("/vendor/font-awesome/css/font-awesome.min.css", express.static(__dirname + '/vendor/font-awesome/css/font-awesome.min.css'));
 app.use("/dist/css/sb-admin-2.css", express.static(__dirname + '/dist/css/sb-admin-2.css'));
@@ -25,7 +42,25 @@ app.use(express.static(__dirname + '/views'));
 /////////////////////////////////////////////////////
 ////////////SYSTEME ROUTE DU SERVER//////////////////
 /////////////////////////////////////////////////////
+
+
+
+
 app.get('/', function(req, res){
+
+    var email = '"reytley@gmail.com"'
+     var requete = 'SELECT * from utilisateur  where email = ' + email;
+      console.log(requete);
+	connection.query( requete , function(err, rows, fields) {
+	connection.end();
+	  if (!err)
+	    console.log('The solution is: ', rows);
+	  else
+	    console.log('Error while performing Query.');
+	  });
+
+
+
   res.sendFile(__dirname + '/login.html');
 });
 app.get('/login', function(req, res){

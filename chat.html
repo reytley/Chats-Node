@@ -13,7 +13,7 @@
     <!-- Custom Fonts -->
     <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
      <link href="/dist/css/customTchat.css" rel="stylesheet" type="text/css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
 
   </head>
 
@@ -22,8 +22,6 @@
 
 
 <body>
-
-    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 <div class="container text-center">
     <div class="row">
        
@@ -62,39 +60,7 @@
              
             <div class="direct-chat-messages"  id="chat">
                     
-                    
-                    <div class="chat-box-single-line">
-                                <abbr class="timestamp">October 8th, 2015</abbr>
-                    </div>
-                    
-                    
-                    <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg doted-border">
-                      <div class="direct-chat-info clearfix">
-                        <span class="direct-chat-name pull-left">Osahan</span>
-                      </div>
-                      <!-- /.direct-chat-info -->
-                      <img alt="message user image" src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg" class="direct-chat-img"><!-- /.direct-chat-img -->
-                      <div class="direct-chat-text">
-                        Hey bro, how’s everything going ?
-                      </div>
-                      <div class="direct-chat-info clearfix">
-                        <span class="direct-chat-timestamp pull-right">3.36 PM</span>
-                      </div>
-                        <div class="direct-chat-info clearfix">
-                        <span class="direct-chat-img-reply-small pull-left">
-                            
-                        </span>
-                        <span class="direct-chat-reply-name">Singh</span>
-                        </div>
-                      <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
-                    
-                    
-                    <div class="chat-box-single-line">
-                        <abbr class="timestamp">October 9th, 2015</abbr>
-                    </div>
+                   
             
                     
 
@@ -147,9 +113,12 @@
    } });
 
     socket.on('chat message', function(msg,login){
-       
-          $('#messages').append($('<li>').text(msg));
-          window.scrollTo(0, document.body.scrollHeight);
+                
+
+
+   $("#chat").scrollTop($("#chat")[0].scrollHeight);
+      
+            $('#status_message').val("");
 
               $('#chat').append(' <div class="direct-chat-msg doted-border">  <div class="direct-chat-info clearfix"><span class="direct-chat-name pull-left">'+login+'</span></div>   <div class="direct-chat-text">'+msg+'</div> </div>');
 
