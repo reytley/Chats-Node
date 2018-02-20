@@ -1,20 +1,32 @@
+/////////////////////////////////////////////////////
+/////////////////VAR BASE SERVER/////////////////////
+/////////////////////////////////////////////////////
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
+
+/////////////////////////////////////////////////////
+////////////SYSTEME ROUTE DU SERVER//////////////////
+/////////////////////////////////////////////////////
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 app.get('/login', function(req, res){
   res.sendFile(__dirname + '/login.html');
 });
+/////////////////////////////////////////////////////
+///////////////SYSTEME SOCKET.IO/////////////////////
+/////////////////////////////////////////////////////
 io.on('connection', function(socket){
+
+	//RECEPTION DE MESSAGE -- Demande de login est mdp si connu dans la bdd alors afficher le msg dans le tchat room 
 	socket.on('chat message', function(msg,login,mdp){
 		console.log(login);
 		console.log(msg);
 		if(login == "rey@gmail.com" && mdp == "mdp"){
-			
-			io.emit('chat message',utilisateur + ' : ' +msg);
+			var msg =   login + ' : ' +msg;
+			io.emit('chat message', msg );
 		}
 	});
 

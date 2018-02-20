@@ -23,11 +23,12 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
-        var utilisitateur = localStorage.getItem('userpseudo');
+     
         var socket = io();
         $('form').submit(function(){
-
-          socket.emit('chat message', $('#m').val(),utilisitateur);
+             var login = localStorage.getItem('login');
+        var mdp = localStorage.getItem('mdp');
+          socket.emit('chat message', $('#m').val(),login,mdp);
           $('#m').val('');
           return false;
         });
