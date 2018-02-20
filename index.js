@@ -11,14 +11,10 @@ const express = require('express');
 app.use("/vendor/bootstrap/css/bootstrap.min.css", express.static(__dirname + '/vendor/bootstrap/css/bootstrap.min.css'));
 app.use("/vendor/font-awesome/css/font-awesome.min.css", express.static(__dirname + '/vendor/font-awesome/css/font-awesome.min.css'));
 app.use("/dist/css/sb-admin-2.css", express.static(__dirname + '/dist/css/sb-admin-2.css'));
-app.use("/dist/css/customTchat.css", express.static(__dirname + '/dist/css/customTchat.css'));
 app.use("/vendor/metisMenu/metisMenu.min.css", express.static(__dirname + '/vendor/metisMenu/metisMenu.min.css'));
 
-app.use("/vendor/jquery/jquery.min.js", express.static(__dirname + '/vendor/jquery/jquery.min.js'));
-app.use("/vendor/bootstrap/js/bootstrap.min.js", express.static(__dirname + '/vendor/bootstrap/js/bootstrap.min.js'));
-app.use("/vendor/metisMenu/metisMenu.min.js", express.static(__dirname + '/vendor/metisMenu/metisMenu.min.js'));
-app.use("/dist/js/sb-admin-2.js", express.static(__dirname + '/dist/js/sb-admin-2.js'));
-app.use(express.static(__dirname + '/views'));
+//app.use("/Assets/js", express.static(__dirname + '/Assets/js'));
+
 
 
 
@@ -35,10 +31,6 @@ app.get('/login', function(req, res){
 app.get('/forms', function(req, res){
   res.sendFile(__dirname + '/forms.html');
 });
-
-app.get('/chat', function(req, res){
-  res.sendFile(__dirname + '/chat.html');
-});
 /////////////////////////////////////////////////////
 ///////////////SYSTEME SOCKET.IO/////////////////////
 /////////////////////////////////////////////////////
@@ -48,8 +40,14 @@ io.on('connection', function(socket){
 	socket.on('chat message', function(msg,login,mdp){
 		console.log(login);
 		console.log(msg);
+<<<<<<< HEAD
 		if(login == "rey@gmail.com" && mdp == "mdp" || login == "bibi@gmail.com" && mdp == "mdp"){
 			io.emit('chat message', msg,login );
+=======
+		if(login == "rey@gmail.com" && mdp == "mdp"){
+			var msg =   login + ' : ' +msg;
+			io.emit('chat message', msg );
+>>>>>>> parent of cdaed37... Add module chat bootstrap
 		}
 	});
 
